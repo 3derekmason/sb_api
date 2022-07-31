@@ -2,8 +2,9 @@
   "name": "story_base_api",
   "version": "1.0.0",
   "description": "thestorybase.com",
-  "main": "index.ts",
+  "main": "index.js",
   "scripts": {
+    "start": "nodemon index.js",
     "test": "test"
   },
   "repository": {
@@ -15,5 +16,17 @@
   "bugs": {
     "url": "https://github.com/3derekmason/story_base_api/issues"
   },
-  "homepage": "https://github.com/3derekmason/story_base_api#readme"
+  "homepage": "https://github.com/3derekmason/story_base_api#readme",
+  "devDependencies": {
+    "@types/cors": "^2.8.12",
+    "@types/express": "^4.17.13",
+    "@types/node": "^18.6.3",
+    "cors": "^2.8.5"
+  },
+  "dependencies": {
+    "@types/dotenv": "^8.2.0",
+    "express": "^4.18.1",
+    "nodemon": "^2.0.19",
+    "typescript": "^4.7.4"
+  }
 }
