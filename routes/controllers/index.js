@@ -1,1 +1,1 @@
-
+exports.stories = require("./stories");
