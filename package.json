@@ -1,0 +1,19 @@
+{
+  "name": "story_base_api",
+  "version": "1.0.0",
+  "description": "thestorybase.com",
+  "main": "index.ts",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/3derekmason/story_base_api.git"
+  },
+  "author": "Derek Mason",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/3derekmason/story_base_api/issues"
+  },
+  "homepage": "https://github.com/3derekmason/story_base_api#readme"
+}
