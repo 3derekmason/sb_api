@@ -12,11 +12,7 @@ module.exports = {
   getAllStories: async (req, res, next) => {
     try {
       const stories = await storiesCollection();
-      res
-        .status(200)
-        .send(
-          (await stories.find({}).toArray()) || "Hello from the other side"
-        );
+      res.status(200).send(await stories.find({}).toArray());
     } catch (err) {
       if (!err.statusCode) {
         err.statusCode = 500;
