@@ -29,6 +29,7 @@ module.exports = {
         author: req.body.author,
         body: req.body.body,
         tags: req.body.tags,
+        link: req.body.link,
         created_at: new Date(),
       });
       res
