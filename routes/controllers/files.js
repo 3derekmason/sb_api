@@ -24,4 +24,23 @@ module.exports = {
       console.error(err);
     }
   },
+  addFile: async (req, res) => {
+    var file = fs.readFileSync(req.file.path);
+
+    var encode_file = file.toString("base64");
+    var final_file = {
+      contentType: req.file.mimetype,
+      file: encode_file.toString("base64"),
+    };
+    newFile.create(final_file, function (err, result) {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log(result);
+        console.log("Saved To database");
+        res.contentType(final_file.contentType);
+        res.send(final_file);
+      }
+    });
+  });
 };
