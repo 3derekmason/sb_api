@@ -1,3 +1,13 @@
+const mongodb = require("mongodb");
+const dotenv = require("dotenv");
+
+dotenv.config();
+
+const storiesCollection = async () => {
+  const client = await mongodb.MongoClient.connect(process.env.MONGODB_URI);
+  return client.db("base").collection("stories");
+};
+
 module.exports = {
   getAllStories: async (req, res, next) => {
     try {
@@ -16,10 +26,10 @@ module.exports = {
       const stories = await storiesCollection();
       await stories.insertOne({
         title: req.body.title,
-        author: req.body.author,
+        authorFirst: req.body.authorFirst,
+        authorLast: req.body.authorLast,
         body: req.body.body,
         tags: req.body.tags,
-        link: req.body.link,
         created_at: new Date(),
       });
       res

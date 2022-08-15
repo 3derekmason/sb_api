@@ -1,7 +1,6 @@
-import bodyParser from "body-parser";
+const bodyParser = require("body-parser");
 const cors = require("cors");
 const express = require("express");
-const fs + require("fs");
 const router = require("./routes/index.js");
 const PORT = process.env.PORT || 5000;
 

@@ -1,4 +1,4 @@
-import multer from "multer";
+const multer = require("multer");
 
 // SET STORAGE
 const storage = multer.diskStorage({
@@ -6,10 +6,10 @@ const storage = multer.diskStorage({
     cb(null, "uploads");
   },
   filename: (req, file, cb) => {
-    cb(null, file.fieldname + "-" + file.originalname);
+    cb(null, file.originalname + "_" + new Date());
   },
 });
 
 let upload = multer({ storage: storage });
 
-export default upload;
+module.exports = upload;
