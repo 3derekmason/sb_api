@@ -34,7 +34,7 @@ module.exports = {
       });
       res
         .status(201)
-        .send(`Story uploaded :${req.body.title} by ${req.body.author}`);
+        .send(`Story uploaded :${req.body.title} by ${req.body.authorFirst}`);
     } catch (err) {
       if (!err.statusCode) {
         err.statusCode = 500;
