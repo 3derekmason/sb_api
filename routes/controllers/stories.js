@@ -42,4 +42,18 @@ module.exports = {
       next(err);
     }
   },
+
+  deleteStory: async (req, res, next) => {
+    try {
+      console.log(req.body.title);
+      const stories = await storiesCollection();
+      await stories.deleteOne({ title: req.body.title });
+      res.status(201).send("Story deleted forever");
+    } catch (err) {
+      if (!err.statusCode) {
+        err.statusCode = 500;
+      }
+      next(err);
+    }
+  },
 };
