@@ -28,7 +28,6 @@ module.exports = {
       await fs.readdir("./uploads", (err, docs) => {
         if (err) console.log(err);
         else {
-          let addedDates = [];
           let correctDoc = "";
           const verifyDate = (ds) => {
             const dsDate = JSON.stringify(new Date(ds));
@@ -42,14 +41,13 @@ module.exports = {
             if (verifyDate(date)) {
               correctDoc = doc;
             }
-            addedDates.push(new Date(date));
           });
           if (!correctDoc) {
             res.status(500).send("No file found...");
           }
           fs.readFile(`./uploads/${correctDoc}`, "utf-8", (err, data) => {
             if (err) console.error(err);
-            res.status(200).send(data);
+            res.status(200).send(JSON.stringify(data));
           });
         }
       });
