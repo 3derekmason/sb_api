@@ -24,33 +24,29 @@ module.exports = {
     }
   },
   getAFile: async (req, res) => {
-    console.log(new Date(req.query.added));
     try {
       await fs.readdir("./uploads", (err, docs) => {
         if (err) console.log(err);
         else {
           let addedDates = [];
-          let correctDate = "";
+          let correctDoc = "";
           const verifyDate = (ds) => {
+            const dsDate = JSON.stringify(new Date(ds));
             const reqDate = req.query.added;
-
-            const reqSecs = reqDate.split(":")[2];
-            const dsSecs = ds.split(":")[2];
-
-            const reqCheck = reqDate.split(":")[1];
-            const dsCheck = ds.split(":")[1];
-
-            return reqCheck === dsCheck;
+            const reqCheck = reqDate.split(":")[0] + reqDate.split(":")[1];
+            const dsCheck = dsDate.split(":")[0] + dsDate.split(":")[1];
+            return reqCheck === dsCheck.slice(1);
           };
           docs.forEach((doc) => {
             const date = doc.split("_")[1];
-
             if (verifyDate(date)) {
               correctDoc = doc;
             }
             addedDates.push(new Date(date));
           });
-
+          if (!correctDoc) {
+            res.status(500).send("No file found...");
+          }
           fs.readFile(`./uploads/${correctDoc}`, "utf-8", (err, data) => {
             if (err) console.error(err);
             res.status(200).send(data);
