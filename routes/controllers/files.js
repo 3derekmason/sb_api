@@ -16,13 +16,45 @@ module.exports = {
       await fs.readdir("./uploads", (err, docs) => {
         if (err) console.log(err);
         else {
-          const results = [];
-          docs.forEach(async (doc, i) => {
-            await fs.readFile(`./uploads/${docs[i]}`, "utf-8", (data) => {
-              console.log(data);
-            });
+          res.status(200).send(docs);
+        }
+      });
+    } catch (err) {
+      console.error(err);
+    }
+  },
+  getAFile: async (req, res) => {
+    console.log(new Date(req.query.added));
+    try {
+      await fs.readdir("./uploads", (err, docs) => {
+        if (err) console.log(err);
+        else {
+          let addedDates = [];
+          let correctDate = "";
+          const verifyDate = (ds) => {
+            const reqDate = req.query.added;
+
+            const reqSecs = reqDate.split(":")[2];
+            const dsSecs = ds.split(":")[2];
+
+            const reqCheck = reqDate.split(":")[1];
+            const dsCheck = ds.split(":")[1];
+
+            return reqCheck === dsCheck;
+          };
+          docs.forEach((doc) => {
+            const date = doc.split("_")[1];
+
+            if (verifyDate(date)) {
+              correctDoc = doc;
+            }
+            addedDates.push(new Date(date));
           });
-          console.log(results);
+
+          fs.readFile(`./uploads/${correctDoc}`, "utf-8", (err, data) => {
+            if (err) console.error(err);
+            res.status(200).send(data);
+          });
         }
       });
     } catch (err) {

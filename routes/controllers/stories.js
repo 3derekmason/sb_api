@@ -45,7 +45,6 @@ module.exports = {
 
   deleteStory: async (req, res, next) => {
     try {
-      console.log(req.body.title);
       const stories = await storiesCollection();
       await stories.deleteOne({ title: req.body.title });
       res.status(201).send("Story deleted forever");
